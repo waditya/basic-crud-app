@@ -1,7 +1,12 @@
 sudo yum update -y
 sudo amazon-linux-extras install -y
-sudo yum install -y httpd
 sudo yum install git -y
+sudo yum install -y httpd
+sudo usermod -a -G apache ec2-user
+sudo chown -R ec2-user:apache /var/www
+sudo chmod 2775 /var/www && find /var/www -type d -exec sudo chmod 2775 {} \;
+find /var/www -type f -exec sudo chmod 0664 {} \;
+
 
 curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.34.0/install.sh | bash
 . ~/.nvm/nvm.sh
